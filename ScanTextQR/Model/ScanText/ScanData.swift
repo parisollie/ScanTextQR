@@ -7,7 +7,7 @@
 
 import Foundation
 
-//Vid 312 
+//V-312 ,paso 1.4
 struct ScanData : Identifiable {
     
     var id = UUID()

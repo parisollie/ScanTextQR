@@ -3,17 +3,20 @@
 //  ScanTextQR
 //
 //  Created by Paul Jaime Felix Flores on 30/07/24.
-//
+// actualizado
 
-//Vid 315
+
 import SwiftUI
 import CodeScanner
+
+//V-315,paso 1.8
 struct QRView: View {
     
     @State private var showScanner = false
-    //Guardamos nuestro texto ya escaneado 
+    //Guardamos nuestro texto ya escaneado
     @State private var qrtext = "Escanear qr"
     
+    //Función que nos pide la libreria.
     func scan(result: Result<ScanResult, ScanError>){
         showScanner = false
         switch result {
@@ -28,8 +31,7 @@ struct QRView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 30) { // Espaciado uniforme entre elementos
-                
+            VStack(spacing: 30) {
                 // Botón estilizado para escanear
                 Button(action: { showScanner = true }) {
                     Label("Escanear QR", systemImage: "qrcode.viewfinder")
@@ -41,14 +43,14 @@ struct QRView: View {
                         .shadow(radius: 2)
                 }
                 .padding(.horizontal, 40)
-
+                
                 // Muestra el texto escaneado con estilo
                 if !qrtext.isEmpty {
                     VStack {
                         Text("Código escaneado:")
                             .font(.headline)
                             .foregroundColor(.gray)
-
+                        
                         Text(qrtext)
                             .font(.body)
                             .padding()
@@ -61,17 +63,21 @@ struct QRView: View {
                     Text("Aún no hay código escaneado")
                         .foregroundColor(.gray)
                 }
-
+                
                 Spacer()
             }
             .padding()
             .navigationTitle("Escanear QR")
             .sheet(isPresented: $showScanner) {
+                //aqui ponemos el codigo qr, podemos poner varios
                 CodeScannerView(codeTypes: [.qr], completion: scan)
             }
         }
     }
-
+    
 }
 
 
+#Preview{
+    ContentView()
+}

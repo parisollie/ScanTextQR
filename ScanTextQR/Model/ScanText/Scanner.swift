@@ -5,12 +5,13 @@
 //  Created by Paul Jaime Felix Flores on 30/07/24.
 //
 
-//Vid 312
 import Foundation
 import SwiftUI
 import VisionKit
 
+//Paso 1.5, ponemos el Scanner
 struct Scanner : UIViewControllerRepresentable {
+
     typealias UIViewControllerType = VNDocumentCameraViewController
     
     let completionHandler : ([String]?) -> Void
@@ -28,7 +29,8 @@ struct Scanner : UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: VNDocumentCameraViewController, context: Context) {
         
     }
-    //Vid 312, ponemos nuestro constructor
+    
+    //Paso 1.6, ponemos nuestro constructor
     init(completion: @escaping ([String]?) -> Void){
         completionHandler = completion
     }
@@ -45,7 +47,7 @@ struct Scanner : UIViewControllerRepresentable {
             recognizer.recognizerText(competionHandler: completionHandler)
         }
         
-        //Los metodos 
+        //Los métodos 
         func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
             completionHandler(nil)
         }
@@ -55,8 +57,5 @@ struct Scanner : UIViewControllerRepresentable {
         }
         
     }
-    
-    
-    
 }
 

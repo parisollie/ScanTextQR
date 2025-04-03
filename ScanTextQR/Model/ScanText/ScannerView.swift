@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ScannerView: View {
     
-    //Vid 313
+    //V-313,paso 1.7
     @State private var showScanner = false
     @State private var texts : [ScanData] = []
     
-    //La funcion que ejecutara todo , nos regresa un scanner
+    //La función que ejecutara todo, nos regresa un scanner.
     func makeScanner() -> Scanner {
         Scanner(completion: { textPage in
             if let outputText = textPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
@@ -31,12 +31,14 @@ struct ScannerView: View {
                 if texts.count > 0 {
                     List{
                         ForEach(texts){ text in
+                            //Mandamos todo el texto a un ScrollView
                             NavigationLink(destination:ScrollView{
                                 Text(text.content)
                                     .multilineTextAlignment(.leading)
                                     .padding()
                             },
                                            label: {
+                                //solo nos mostrará la primera línea del texto.
                                 Text(text.content).lineLimit(1)
                             })
                         }
@@ -45,7 +47,8 @@ struct ScannerView: View {
                 }else {
                     Text("No hay nada escaneado")
                 }
-            }.navigationTitle("Escanear documento")
+            }
+            .navigationTitle("Escanear documento")
                 .toolbar{
                     Button {
                         showScanner = true
@@ -54,9 +57,11 @@ struct ScannerView: View {
                     }.sheet(isPresented: $showScanner) {
                         makeScanner()
                     }
-
                 }
         }
     }
 }
 
+#Preview{
+    ContentView()
+}

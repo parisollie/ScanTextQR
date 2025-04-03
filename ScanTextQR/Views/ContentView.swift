@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView{
-            //Vid 310 
+            //V-310,paso 1.0
             ScannerView().tabItem{
                 Label("Scan Text", systemImage: "doc.text.viewfinder")
             }
